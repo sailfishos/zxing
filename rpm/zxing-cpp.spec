@@ -1,9 +1,9 @@
 Name:       zxing-cpp
 Summary:    ZXing port to C++
-Version:    1.1.1
+Version:    1.4.0
 Release:    1
 License:    ASL 2.0
-URL:        https://github.com/nu-book/zxing-cpp
+URL:        https://github.com/sailfishos/zxing
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  cmake >= 3.10
 
@@ -21,7 +21,7 @@ ZXing-C++ ("zebra crossing") is an open-source, multi-format 1D/2D barcode image
 %autosetup -n %{name}-%{version}/%{name}
 
 %build
-%cmake 
+%cmake -DBUILD_EXAMPLES=false
 %make_build
 
 %install
