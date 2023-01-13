@@ -1,6 +1,6 @@
 Name:       zxing-cpp
 Summary:    ZXing port to C++
-Version:    1.4.0
+Version:    2.0.0
 Release:    1
 License:    ASL 2.0
 URL:        https://github.com/sailfishos/zxing
