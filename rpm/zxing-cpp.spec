@@ -1,11 +1,13 @@
 Name:       zxing-cpp
 Summary:    ZXing port to C++
-Version:    2.0.0
+Version:    3.0.2
 Release:    1
 License:    ASL 2.0
 URL:        https://github.com/sailfishos/zxing
 Source0:    %{name}-%{version}.tar.gz
-BuildRequires:  cmake >= 3.10
+Patch1:     0001-Use-consistent-soname-version.patch
+Patch2:     0002-Don-t-clone-stb-during-build.patch
+BuildRequires:  cmake >= 3.16
 
 %package devel
 Summary: Development files for the %{name} package
@@ -18,10 +20,10 @@ ZXing-C++ ("zebra crossing") is an open-source, multi-format 1D/2D barcode image
 %{summary}.
 
 %prep
-%autosetup -n %{name}-%{version}/%{name}
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
-%cmake -DBUILD_EXAMPLES=false
+%cmake -DZXING_EXAMPLES=false
 %make_build
 
 %install
@@ -32,12 +34,10 @@ ZXing-C++ ("zebra crossing") is an open-source, multi-format 1D/2D barcode image
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root)
 %license LICENSE
 %{_libdir}/libZXing.so.*
 
 %files devel
-%defattr(-,root,root)
 %{_includedir}/ZXing/*
 %{_libdir}/libZXing.so
 %{_libdir}/pkgconfig/zxing.pc

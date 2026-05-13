@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matti Viljanen <matti.viljanen@jolla.com>
+Date: Wed, 13 May 2026 17:46:20 +0300
+Subject: [PATCH] Use consistent soname version
+
+zxing-cpp bumped soname version without changing application version,
+which somehow breaks automatic dependencies in packages using it.
+Fix it simply by setting the package major version as the soname.
+---
+ core/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
+index bd152ca9..19793200 100644
+--- a/core/CMakeLists.txt
++++ b/core/CMakeLists.txt
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
+ 
+ project (ZXing VERSION "3.0.2")
+ set (ZXING_VERSION_SUFFIX "")
+-set (ZXING_SONAME 4) # see https://github.com/zxing-cpp/zxing-cpp/issues/333
++set (ZXING_SONAME 3) # see https://github.com/zxing-cpp/zxing-cpp/issues/333
+ 
+ option (ZXING_USE_BUNDLED_ZINT "Use the bundled libzint for barcode creation/writing" ON)
+ foreach(format 1D AZTEC DATAMATRIX MAXICODE PDF417 QRCODE)
