@@ -1,3 +1,6 @@
 [submodule "zxing-cpp"]
 	path = zxing-cpp
 	url = https://github.com/sailfishos-mirror/zxing-cpp
+[submodule "stb"]
+	path = stb
+	url = https://github.com/nothings/stb.git

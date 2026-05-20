@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Matti Viljanen <matti.viljanen@jolla.com>
+Date: Mon, 18 May 2026 09:57:20 +0300
+Subject: [PATCH] Don't clone stb during build
+
+---
+ zxing.cmake | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/zxing.cmake b/zxing.cmake
+index 99f908a2..429e8def 100644
+--- a/zxing.cmake
++++ b/zxing.cmake
+@@ -11,12 +11,8 @@ macro(zxing_add_package_stb)
+     endif()
+ 
+     if (NOT STB_FOUND)
+-        include(FetchContent)
+-        FetchContent_Declare (stb
+-            GIT_REPOSITORY https://github.com/nothings/stb.git)
+-        FetchContent_MakeAvailable (stb)
+         add_library(stb::stb INTERFACE IMPORTED)
+-        target_include_directories(stb::stb INTERFACE ${stb_SOURCE_DIR})
++        target_include_directories(stb::stb INTERFACE ${CMAKE_SOURCE_DIR}/../stb)
+     else()
+         add_library(stb::stb ALIAS PkgConfig::STB)
+     endif()
